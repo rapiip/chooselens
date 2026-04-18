@@ -1,0 +1,18 @@
+export const web3Theme = {
+  '--color-bg-primary': '#0A0A0F',
+  '--color-bg-surface': '#0F1117',
+  '--color-bg-card': '#141820',
+  '--color-accent-primary': '#00D4FF',
+  '--color-accent-secondary': '#FFD700',
+  '--color-accent-tertiary': '#6DB0FF',
+  '--color-text-primary': '#E8EDF5',
+  '--color-text-secondary': '#7A8899',
+  '--color-text-tertiary': '#95A2B5',
+  '--color-border': 'rgba(0, 212, 255, 0.15)',
+  '--font-heading': '"Space Mono", monospace',
+  '--font-body': '"IBM Plex Sans Condensed", sans-serif',
+  '--font-mono': '"IBM Plex Mono", monospace',
+  '--font-accent': '"DM Sans", sans-serif',
+  '--radius-lens': '6px',
+  '--transition-easing': 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+}

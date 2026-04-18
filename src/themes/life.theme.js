@@ -1,0 +1,18 @@
+export const lifeTheme = {
+  '--color-bg-primary': '#FAFAF7',
+  '--color-bg-surface': '#F2F1ED',
+  '--color-bg-card': '#FFFFFF',
+  '--color-accent-primary': '#C4622D',
+  '--color-accent-secondary': '#2D6A4F',
+  '--color-accent-tertiary': '#E9C46A',
+  '--color-text-primary': '#111111',
+  '--color-text-secondary': '#555550',
+  '--color-text-tertiary': '#888880',
+  '--color-border': 'rgba(0, 0, 0, 0.08)',
+  '--font-heading': '"Playfair Display", serif',
+  '--font-body': '"Source Serif 4", serif',
+  '--font-mono': '"DM Sans", sans-serif',
+  '--font-accent': '"DM Sans", sans-serif',
+  '--radius-lens': '20px',
+  '--transition-easing': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+}

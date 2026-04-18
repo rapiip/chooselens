@@ -1,0 +1,18 @@
+export const cybersecTheme = {
+  '--color-bg-primary': '#030508',
+  '--color-bg-surface': '#070B10',
+  '--color-bg-card': '#0C1018',
+  '--color-accent-primary': '#00FF41',
+  '--color-accent-secondary': '#FF3B30',
+  '--color-accent-tertiary': '#FFB700',
+  '--color-text-primary': '#C0D4C0',
+  '--color-text-secondary': '#5A7A5A',
+  '--color-text-tertiary': '#799579',
+  '--color-border': 'rgba(0, 255, 65, 0.2)',
+  '--font-heading': '"JetBrains Mono", monospace',
+  '--font-body': '"JetBrains Mono", monospace',
+  '--font-mono': '"JetBrains Mono", monospace',
+  '--font-accent': '"JetBrains Mono", monospace',
+  '--radius-lens': '4px',
+  '--transition-easing': 'steps(8, end)',
+}

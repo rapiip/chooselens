@@ -1,0 +1,18 @@
+export const selectionTheme = {
+  '--color-bg-primary': '#07080C',
+  '--color-bg-surface': '#0E1220',
+  '--color-bg-card': '#12172A',
+  '--color-accent-primary': '#9AA4FF',
+  '--color-accent-secondary': '#E7B77A',
+  '--color-accent-tertiary': '#7EE0AF',
+  '--color-text-primary': '#F4F5F8',
+  '--color-text-secondary': '#A3ADC2',
+  '--color-text-tertiary': '#8891A4',
+  '--color-border': 'rgba(255, 255, 255, 0.1)',
+  '--font-heading': '"Space Mono", monospace',
+  '--font-body': '"DM Sans", sans-serif',
+  '--font-mono': '"IBM Plex Mono", monospace',
+  '--font-accent': '"DM Sans", sans-serif',
+  '--radius-lens': '22px',
+  '--transition-easing': 'cubic-bezier(0.22, 1, 0.36, 1)',
+}
