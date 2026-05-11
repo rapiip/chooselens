@@ -6,8 +6,10 @@ import InteractiveTerminal from '../components/cybersec/InteractiveTerminal'
 import NmapProjectCard from '../components/cybersec/NmapProjectCard'
 import PersistentNav from '../components/common/PersistentNav'
 import ReadingProgress from '../components/common/ReadingProgress'
+import SoundToggle from '../components/common/SoundToggle'
 import { cybersecContent } from '../content/cybersec.content'
 import { useDeepLink } from '../hooks/useDeepLink'
+import { useEngagementTracker } from '../hooks/useEngagementTracker'
 import { useIdleDetection } from '../hooks/useIdleDetection'
 import { useTheme } from '../hooks/useTheme'
 import { cybersecTheme } from '../themes/cybersec.theme'
@@ -26,6 +28,7 @@ function CybersecPage() {
 
   useTheme(cybersecTheme, 'cybersecurity')
   useDeepLink([showLoader])
+  useEngagementTracker('cybersecurity', ['about', 'projects', 'skills', 'contact'])
 
   useEffect(() => {
     if (reduceMotion) return undefined
@@ -155,6 +158,7 @@ function CybersecPage() {
       </div>
 
       <PersistentNav anchors={['about', 'projects', 'skills', 'contact']} lens="cybersecurity" />
+      <SoundToggle lens="cybersecurity" />
     </motion.main>
   )
 }

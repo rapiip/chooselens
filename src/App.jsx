@@ -12,6 +12,8 @@ import NotFoundPage from './pages/NotFoundPage'
 const Web3Page = lazy(() => import('./pages/Web3Page'))
 const CybersecPage = lazy(() => import('./pages/CybersecPage'))
 const LifePage = lazy(() => import('./pages/LifePage'))
+const DevHeatmapPage = lazy(() => import('./pages/DevHeatmapPage'))
+const ConnectionGraphPage = lazy(() => import('./pages/ConnectionGraphPage'))
 
 const routeMeta = {
   '/': {
@@ -69,6 +71,22 @@ function App() {
             element={
               <Suspense fallback={<LifeSkeleton />}>
                 <LifePage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/dev"
+            element={
+              <Suspense fallback={null}>
+                <DevHeatmapPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/connections"
+            element={
+              <Suspense fallback={null}>
+                <ConnectionGraphPage />
               </Suspense>
             }
           />

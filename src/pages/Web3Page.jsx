@@ -2,11 +2,13 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import PersistentNav from '../components/common/PersistentNav'
 import ReadingProgress from '../components/common/ReadingProgress'
+import SoundToggle from '../components/common/SoundToggle'
 import BlockConfirmLoader from '../components/web3/BlockConfirmLoader'
 import ContractCard from '../components/web3/ContractCard'
 import HexParticleBackground from '../components/web3/HexParticleBackground'
 import TransactionFeed from '../components/web3/TransactionFeed'
 import { useDeepLink } from '../hooks/useDeepLink'
+import { useEngagementTracker } from '../hooks/useEngagementTracker'
 import { useTheme } from '../hooks/useTheme'
 import { web3Content } from '../content/web3.content'
 import { web3Theme } from '../themes/web3.theme'
@@ -18,6 +20,7 @@ function Web3Page() {
 
   useTheme(web3Theme, 'web3')
   useDeepLink([showLoader])
+  useEngagementTracker('web3', ['about', 'projects', 'skills', 'contact'])
 
   useEffect(() => {
     if (reduceMotion) return undefined
@@ -175,6 +178,7 @@ function Web3Page() {
       </div>
 
       <PersistentNav anchors={['about', 'projects', 'skills', 'contact']} lens="web3" />
+      <SoundToggle lens="web3" />
     </motion.main>
   )
 }

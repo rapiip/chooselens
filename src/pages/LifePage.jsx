@@ -2,12 +2,15 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import PersistentNav from '../components/common/PersistentNav'
 import ReadingProgress from '../components/common/ReadingProgress'
+import SoundToggle from '../components/common/SoundToggle'
 import CurrentlyObsessedWith from '../components/life/CurrentlyObsessedWith'
 import LearningJournal from '../components/life/LearningJournal'
 import QuoteCarousel from '../components/life/QuoteCarousel'
+import ReadingTime, { SectionReadingBadge } from '../components/life/ReadingTime'
 import SoftFadeLoader from '../components/life/SoftFadeLoader'
 import { lifeContent } from '../content/life.content'
 import { useDeepLink } from '../hooks/useDeepLink'
+import { useEngagementTracker } from '../hooks/useEngagementTracker'
 import { useTheme } from '../hooks/useTheme'
 import { lifeTheme } from '../themes/life.theme'
 import { pageVariants } from '../utils/transitions'
@@ -18,6 +21,7 @@ function LifePage() {
 
   useTheme(lifeTheme, 'life')
   useDeepLink([showLoader])
+  useEngagementTracker('life', ['about', 'journal', 'interests', 'contact'])
 
   useEffect(() => {
     if (reduceMotion) return undefined
@@ -43,7 +47,10 @@ function LifePage() {
             <p className="eyebrow">Kehidupan Saya Lens</p>
             <h1 className="mt-4 max-w-3xl font-heading text-5xl leading-tight md:text-7xl">{lifeContent.hero.name}</h1>
             <p className="mt-5 max-w-2xl text-xl leading-9 text-muted">{lifeContent.hero.tagline}</p>
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-6">
+              <ReadingTime content={lifeContent} />
+            </div>
+            <div className="mt-6 flex flex-wrap gap-4">
               {lifeContent.hero.ctas.map((cta) => (
                 <a
                   className="rounded-full border border-border bg-card px-5 py-3 font-accent text-sm font-medium text-text shadow-soft hover:-translate-y-1"
@@ -81,7 +88,10 @@ function LifePage() {
         <section className="py-12" id="about">
           <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
             <div className="section-frame bg-card p-6 md:p-8">
-              <p className="eyebrow">{lifeContent.about.title}</p>
+              <div className="flex items-center justify-between">
+                <p className="eyebrow">{lifeContent.about.title}</p>
+                <SectionReadingBadge texts={lifeContent.about.paragraphs} />
+              </div>
               <div className="mt-6 space-y-5 text-xl leading-9 text-muted">
                 {lifeContent.about.paragraphs.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
@@ -93,9 +103,14 @@ function LifePage() {
         </section>
 
         <section className="py-12" id="journal">
-          <div className="mb-8">
-            <p className="eyebrow">Learning Journal</p>
-            <h2 className="mt-3 font-heading text-4xl text-text md:text-5xl">Catatan perjalanan belajar</h2>
+          <div className="mb-8 flex items-end justify-between gap-4">
+            <div>
+              <p className="eyebrow">Learning Journal</p>
+              <h2 className="mt-3 font-heading text-4xl text-text md:text-5xl">Catatan perjalanan belajar</h2>
+            </div>
+            <SectionReadingBadge
+              texts={lifeContent.journalEntries.map((e) => `${e.title} ${e.reflection}`)}
+            />
           </div>
           <div className="section-frame bg-card p-6 md:p-8">
             <LearningJournal entries={lifeContent.journalEntries} />
@@ -149,6 +164,7 @@ function LifePage() {
       </div>
 
       <PersistentNav anchors={['about', 'journal', 'interests', 'contact']} lens="life" />
+      <SoundToggle lens="life" />
     </motion.main>
   )
 }
