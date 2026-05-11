@@ -1,9 +1,13 @@
 import { lazy, Suspense } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { Route, Routes, useLocation } from 'react-router-dom'
+import ErrorBoundary from './components/common/ErrorBoundary'
 import LensTransition from './components/common/LensTransition'
+import { Web3Skeleton, CybersecSkeleton, LifeSkeleton } from './components/common/LensSkeletons'
+import ReturnVisitPrompt from './components/common/ReturnVisitPrompt'
 import RouteMeta from './components/common/RouteMeta'
 import LensSelectionPage from './pages/LensSelectionPage'
+import NotFoundPage from './pages/NotFoundPage'
 
 const Web3Page = lazy(() => import('./pages/Web3Page'))
 const CybersecPage = lazy(() => import('./pages/CybersecPage'))
@@ -37,20 +41,41 @@ function App() {
   const meta = routeMeta[location.pathname] ?? routeMeta['/']
 
   return (
-    <>
+    <ErrorBoundary>
       <RouteMeta title={meta.title} description={meta.description} />
       <LensTransition />
-      <Suspense fallback={null}>
-        <AnimatePresence mode="wait">
-          <Routes location={location} key={location.pathname}>
-            <Route path="/" element={<LensSelectionPage />} />
-            <Route path="/web3" element={<Web3Page />} />
-            <Route path="/cybersecurity" element={<CybersecPage />} />
-            <Route path="/life" element={<LifePage />} />
-          </Routes>
-        </AnimatePresence>
-      </Suspense>
-    </>
+      <ReturnVisitPrompt />
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<LensSelectionPage />} />
+          <Route
+            path="/web3"
+            element={
+              <Suspense fallback={<Web3Skeleton />}>
+                <Web3Page />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/cybersecurity"
+            element={
+              <Suspense fallback={<CybersecSkeleton />}>
+                <CybersecPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/life"
+            element={
+              <Suspense fallback={<LifeSkeleton />}>
+                <LifePage />
+              </Suspense>
+            }
+          />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </AnimatePresence>
+    </ErrorBoundary>
   )
 }
 

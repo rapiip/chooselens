@@ -4,6 +4,10 @@ function HexParticleBackground() {
   const canvasRef = useRef(null)
 
   useEffect(() => {
+    // Respect prefers-reduced-motion
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    if (motionQuery.matches) return undefined
+
     const canvas = canvasRef.current
     const context = canvas?.getContext('2d')
     if (!canvas || !context) return undefined
@@ -21,8 +25,10 @@ function HexParticleBackground() {
     }
 
     let frame
+    let running = true
 
     const render = () => {
+      if (!running) return
       context.clearRect(0, 0, canvas.width, canvas.height)
       context.fillStyle = 'rgba(0, 212, 255, 0.45)'
       particles.forEach((particle) => {
@@ -35,13 +41,29 @@ function HexParticleBackground() {
       frame = window.requestAnimationFrame(render)
     }
 
+    // Listen for changes to motion preference
+    const handleMotionChange = (event) => {
+      if (event.matches) {
+        running = false
+        window.cancelAnimationFrame(frame)
+        context.clearRect(0, 0, canvas.width, canvas.height)
+      } else {
+        running = true
+        render()
+      }
+    }
+
+    motionQuery.addEventListener('change', handleMotionChange)
+
     resize()
     render()
     window.addEventListener('resize', resize)
 
     return () => {
+      running = false
       window.cancelAnimationFrame(frame)
       window.removeEventListener('resize', resize)
+      motionQuery.removeEventListener('change', handleMotionChange)
     }
   }, [])
 
